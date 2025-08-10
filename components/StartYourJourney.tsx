@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react'
 import AddTest from './AddTest'
+import { useRouter } from 'next/navigation';
+
+
 
 interface Test {
   id: string
@@ -30,6 +33,8 @@ const StartYourJourney = () => {
     setSearchTerm(e.target.value)
   }
 
+  const router = useRouter();
+
   return (
     <div className='flex items-center justify-center bg-[#daf3f6] h-[605px]'>
         <div className='flex items-center justify-center flex-col gap-2 w-[672px] text-center'>
@@ -48,7 +53,7 @@ const StartYourJourney = () => {
 
             <div className='rounded-[8px] overflow-hidden w-full'>
               {searchTerm && filteredTests.map(test => (
-                <AddTest key={test.id} code={test.code} name={test.name} />
+                <AddTest key={test.id} id={test.id} code={test.code} name={test.name} />
               ))}
               {filteredTests.length === 0 && searchTerm && (
                 <div className='bg-white p-4 text-[#666] text-[14px]'>
@@ -57,8 +62,14 @@ const StartYourJourney = () => {
               )}
             </div>
 
-            <button type="submit" className='flex items-center justify-center gap-[8px] w-full bg-[#0B7285] text-[14px] text-[#F4F6F9] rounded-[99px] h-[48px] mt-1 cursor-pointer'>
-            <span>View Added Tests</span> <img src="/icons/right-icon.svg" alt="right-icon" />
+
+            <button
+              type="button"
+              onClick={() => router.push('/lab-tests')}
+              className='flex items-center justify-center gap-[8px] w-full bg-[#0B7285] text-[14px] text-[#F4F6F9] rounded-[99px] h-[48px] mt-1 cursor-pointer'
+            >
+              <span>View Added Tests</span>
+              <img src="/icons/right-icon.svg" alt="right-icon" />
             </button>
 
 

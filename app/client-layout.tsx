@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import NavBar from "@/components/NavBar";
+import { TestProvider } from "@/context/TestContext"; // ✅ Import your context
 
 export default function ClientLayout({
   children,
@@ -12,10 +13,9 @@ export default function ClientLayout({
   const hideNav = pathname.startsWith("/auth");
 
   return (
-    <>
+    <TestProvider> {/* ✅ Wrap everything in your context provider */}
       {!hideNav && <NavBar />}
-
       {children}
-    </>
+    </TestProvider>
   );
 }

@@ -1,13 +1,18 @@
-"use client"
+'use client';
 
-import React from 'react'
+import React from 'react';
+import { useTestContext } from '@/context/TestContext';
 
 interface AddTestProps {
-  code: string
-  name: string
+  id: string;
+  code: string;
+  name: string;
 }
 
-const AddTest: React.FC<AddTestProps> = ({ code, name }) => {
+const AddTest: React.FC<AddTestProps> = ({ id, code, name }) => {
+  const { addTest, isTestAdded } = useTestContext();
+  const alreadyAdded = isTestAdded(id);
+
   return (
     <div className='flex justify-between bg-[#FFFFFF] p-4 border-b border-b-[#cacaca]'>
       <div className='text-[#101A28] flex flex-col items-start'>
@@ -15,11 +20,17 @@ const AddTest: React.FC<AddTestProps> = ({ code, name }) => {
         <p className='text-[12px]'>{name}</p>
       </div>
 
-      <button id='TestButton' className='border rounded-[99px] border-[#c9cdcd] py-[8px] px-[10px] text-[14px] w-[93px] cursor-pointer'>Add Test</button>
+      <button
+        onClick={() => addTest({ id, code, name })}
+        disabled={alreadyAdded}
+        className={`border rounded-[99px] border-[#c9cdcd] py-[8px] px-[10px] text-[14px] w-[100px] ${
+          alreadyAdded ? 'bg-gray-200 text-gray-600 cursor-default' : 'cursor-pointer'
+        }`}
+      >
+        {alreadyAdded ? 'Test Added' : 'Add Test'}
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default AddTest
-
-
+export default AddTest;

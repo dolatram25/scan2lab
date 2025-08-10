@@ -92,9 +92,6 @@ export default function EnterOTP() {
   };
 
 
-
-
-
   return (
     
     <div className='flex items-center justify-center w-[100vw] h-[100vh] bg-[#daf3f6]'>
@@ -144,8 +141,6 @@ export default function EnterOTP() {
                 {timer === 0 ? 'Resend OTP' : `Resend OTP in ${timer}s`}
               </div>
             </div>
-
-            
             
             
             <button disabled={!isOtpComplete} type="submit" className={`text-[14px] rounded-[99px] h-[40px] w-full ${otp.join('').length === 6 ?'bg-[#0B7285] text-[#F4F6F9] cursor-pointer' : 'bg-[#E4E8EC] text-[#727C88]' }`}>
